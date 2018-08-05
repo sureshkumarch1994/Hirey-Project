@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.hire.pojo.JobsPostedPojo" table="jobs_posted">
+		<id name="job_id">
+			<generator class="increment"></generator>
+		</id>
+		<property name="company_id"></property>
+		<property name="job_code"></property>
+		<property name="job_cat_id"></property>
+		<property name="jobtype_id"></property>
+		<property name="job_position"></property>
+		<property name="city_id"></property>
+		<property name="salary_monthly"></property>
+		<property name="salary_ctc"></property>
+		<property name="experience"></property>
+		<property name="on_date_day"></property>
+		<property name="on_date_month"></property>
+		<property name="area_name"></property>
+		<property name="posted_on"></property>
+		<property name="posted_by"></property>
+		<property name="job_description"></property>
+
+		<many-to-one class="com.hire.pojo.CityLocationsPojo"
+			column="city_id" name="clp" not-null="true" insert="false" update="false"
+			unique="false" optimistic-lock="true" not-found="exception"
+			embed-xml="true" cascade="all"></many-to-one>
+
+		<many-to-one class="com.hire.pojo.CompaniesPojo" column="company_id"
+			name="cp" not-null="true" insert="false" update="false" unique="false"
+			optimistic-lock="true" not-found="exception" embed-xml="true"
+			cascade="all"></many-to-one>
+
+		<many-to-one class="com.hire.pojo.JobCatogeriesPojo"
+			column="job_cat_id" name="jcp" not-null="true" insert="false" update="false"
+			unique="false" optimistic-lock="true" not-found="exception"
+			embed-xml="true" cascade="all"></many-to-one>
+
+		<many-to-one class="com.hire.pojo.JobTypesPojo" column="jobtype_id"
+			name="jtp" not-null="true" insert="false" update="false" unique="false"
+			optimistic-lock="true" not-found="exception" embed-xml="true"
+			cascade="all"></many-to-one>
+	</class>
+</hibernate-mapping>

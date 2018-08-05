@@ -1,0 +1,143 @@
+company's logo in header & footer. ----DONE.
+
+instead of Textbox for Enter keyword, write Select the Job type- 
+Part time/full time by using <select> & <option> tag. ---DONE.
+
+Arrange single.html page .
+
+change work Experience form in every page.
+
+Remove href from company's name in jobs page. ---DONE.
+
+					<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript">
+        var contentstring = [];
+        var regionlocation = [];
+        var markers = [];
+        var iterator = 0;
+        var areaiterator = 0;
+        var map;
+        var infowindow = [];
+        geocoder = new google.maps.Geocoder();
+        
+        $(document).ready(function () {
+            setTimeout(function() { initialize(); }, 400);
+        });
+        
+        function initialize() {           
+            infowindow = [];
+            markers = [];
+            GetValues();
+            iterator = 0;
+            areaiterator = 0;
+            region = new google.maps.LatLng(regionlocation[areaiterator].split(',')[0], regionlocation[areaiterator].split(',')[1]);
+            map = new google.maps.Map(document.getElementById("Map"), { 
+                zoom: 16,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                center: region,
+            });
+            drop();
+        }
+        
+        function GetValues() {
+            //Get the Latitude and Longitude of a Point site : http://itouchmap.com/latlong.html
+            contentstring[0] = "Part Time";
+            regionlocation[0] = '12.9574577,77.7462446';
+                        
+            contentstring[1] = "Full Time";
+            regionlocation[1] = "12.9576904,77.744233";
+            
+            contentstring[2] = "Some text";
+            regionlocation[2] = "12.9581452,77.7439996";
+            
+
+            
+        }
+               
+        function drop() {
+            for (var i = 0; i < contentstring.length; i++) {
+                setTimeout(function() {
+                    addMarker();
+                }, 800);
+            }
+        }
+
+        function addMarker() {
+            var address = contentstring[areaiterator];
+            var icons = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+            var templat = regionlocation[areaiterator].split(',')[0];
+            var templong = regionlocation[areaiterator].split(',')[1];
+            var temp_latLng = new google.maps.LatLng(templat, templong);
+            markers.push(new google.maps.Marker(
+            {
+                position: temp_latLng,
+                map: map,
+                icon: icons,
+                draggable: false
+            }));            
+            iterator++;
+            info(iterator);
+            areaiterator++;
+        }
+
+        function info(i) {
+            infowindow[i] = new google.maps.InfoWindow({
+                content: contentstring[i - 1]
+            });
+            infowindow[i].content = contentstring[i - 1];
+            google.maps.event.addListener(markers[i - 1], 'click', function() {
+                for (var j = 1; j < contentstring.length + 1; j++) {
+                    infowindow[j].close();
+                }
+                infowindow[i].open(map, markers[i - 1]);
+            });
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+						function myMap() {
+						  var mapCanvas = document.getElementById("map");
+						  var myCenter = new google.maps.LatLng(12.958365, 77.745148); 
+						  var mapOptions = {center: myCenter, zoom: 16};
+						  var map = new google.maps.Map(mapCanvas,mapOptions);
+						  
+						  var marker = new google.maps.Marker({
+							position: myCenter,
+							animation: google.maps.Animation.BOUNCE
+						  });
+						  marker.setMap(map);
+						  
+						  
+						  var myCity = new google.maps.Circle({
+							center: myCenter,
+							radius: 300,
+							strokeColor: "#23b684",
+							strokeOpacity: 0.8,
+							strokeWeight: 2,
+							fillColor: "#23b684",
+							fillOpacity: 0.4
+						  });
+						  myCity.setMap(map);
+						  
+						}
+						
+
+							
+					</script>
+					
+					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCb2CW05z6tLe2aTv_6zGsKgM16UhstFY&callback=myMap"></script>

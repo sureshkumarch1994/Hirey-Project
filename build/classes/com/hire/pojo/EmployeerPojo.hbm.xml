@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.hire.pojo.EmployeerPojo" table="employeer">
+		<id name="emp_id">
+			<generator class="increment"></generator>
+		</id>
+		<property name="emp_name"></property>
+		<property name="emp_email"></property>
+		<property name="emp_phone"></property>
+		<property name="company_name"></property>
+		<property name="your_designation"></property>
+		<property name="emp_status"></property>
+		<property name="encrypt_pass"></property>
+		<property name="emp_salt"></property>
+	</class>
+</hibernate-mapping>
